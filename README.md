@@ -38,4 +38,5 @@ backend-development/
 
 ### [Lab 2: SQLite and Relational Database Operations](./lab-02/)
 * **Objective:** Embedded relational database operations using SQLite and building full CRUD REST APIs with Express.js.
+* **Live Deployment:** [https://niharika-lab-2-sqlite.onrender.com/books/](https://niharika-lab-2-sqlite.onrender.com/books/)
 * **Documentation:** See [`lab-02/README.md`](./lab-02/README.md)

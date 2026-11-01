@@ -23,7 +23,7 @@
 ## 🔗 Project Links
 
 - **GitHub Repository Link:** [https://github.com/pantalaniharika-hub/Backend-Development-Fundamentals](https://github.com/pantalaniharika-hub/Backend-Development-Fundamentals)
-- **Live Deployment Link:** `https://[your-app-name].onrender.com` *(Placeholder for deployment on Render)*
+- **Live Deployment Link:** [https://niharika-lab-2-sqlite.onrender.com/books/](https://niharika-lab-2-sqlite.onrender.com/books/)
 
 ---
 
