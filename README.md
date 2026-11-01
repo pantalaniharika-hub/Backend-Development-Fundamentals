@@ -2,7 +2,7 @@
 
 > Department of Computer Science & Engineering (Data Science)  
 > **Aurora University**  
-> Student Name: **Niharika Pantala** | Section: **CSE-DS 1B**
+> Student Name: **Niharika Pantala** | Section: **CSE-DS 2B**
 
 ---
 
