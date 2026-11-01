@@ -9,7 +9,7 @@
 
 - **Live Render Web Service:** [Deploying to Render via GitHub...]  
   *(Will be populated with the exact active Render URL once deployed, e.g., `https://lab-01-xxxx.onrender.com`)*
-- **GitHub Repository:** [Awaiting repository URL...]
+- **GitHub Repository:** [https://github.com/pantalaniharika-hub/lab_1](https://github.com/pantalaniharika-hub/lab_1)
 
 ---
 
@@ -76,8 +76,8 @@ lab-01/
 
 ### 1. Clone the Repository
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-cd lab-01
+git clone https://github.com/pantalaniharika-hub/lab_1.git
+cd lab_1
 ```
 
 ### 2. Install Dependencies
