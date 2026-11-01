@@ -1,0 +1,134 @@
+{
+  "info": {
+    "name": "Lab 2 - Books CRUD API (SQLite)",
+    "description": "Postman Collection for Aurora University - Lab 2: SQLite and Relational Database Operations (Niharika Pantala - CSE-DS 1B)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. GET All Books",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""]
+        },
+        "description": "Retrieve all books from SQLite database (Expect 200 OK)"
+      }
+    },
+    {
+      "name": "2. GET Single Book by ID (ID: 1)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/1/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "1", ""]
+        },
+        "description": "Retrieve single book with id = 1 (Expect 200 OK)"
+      }
+    },
+    {
+      "name": "3. POST Add New Book",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Full Stack Development\",\n  \"author\": \"Niharika\",\n  \"price\": 550,\n  \"pages\": 350\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""]
+        },
+        "description": "Add new book to database (Expect 201 Created and generated bookId)"
+      }
+    },
+    {
+      "name": "4. PUT Update Book (ID: 1)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Advanced Python\",\n  \"author\": \"Niharika\",\n  \"price\": 650,\n  \"pages\": 400\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/1/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "1", ""]
+        },
+        "description": "Update book details with id = 1 (Expect 200 OK)"
+      }
+    },
+    {
+      "name": "5. DELETE Book (ID: 11)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/11/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "11", ""]
+        },
+        "description": "Delete newly added book with id = 11 (Expect 200 OK)"
+      }
+    },
+    {
+      "name": "6. GET Invalid Book ID (Expect 404)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/999/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "999", ""]
+        },
+        "description": "Request non-existent book (Expect 404 Not Found)"
+      }
+    },
+    {
+      "name": "7. POST Invalid Data (Expect 400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Incomplete Book\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""]
+        },
+        "description": "Request with missing required fields (Expect 400 Bad Request)"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ]
+}
+
