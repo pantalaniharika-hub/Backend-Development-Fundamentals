@@ -111,7 +111,7 @@ The native HTTP server will start on `http://localhost:3000`.
 | Method | Endpoint | Description | Content-Type | Status Code | Sample Response |
 | :---: | :--- | :--- | :---: | :---: | :--- |
 | `GET` | `/` | Displays welcome message | `text/html` | `200 OK` | `Welcome to Node.js and Express Server!` |
-| `GET` | `/about` | Returns student name & section | `application/json` | `200 OK` | `{"name":"Niharika Pantala","section":"CSE-DS 1B"}` |
+| `GET` | `/about` | Returns student details | `application/json` | `200 OK` | `{"name":"Niharika Pantala","section":"CSE-DS 1B","registrationNumber":"252U1R3070"}` |
 | `GET` | `/time` | Current date & time using `new Date()` | `application/json` | `200 OK` | `{"currentTime":"Sun Nov 01 2026..."}` |
 | `ANY` | `/*` (Unknown) | Catch-all 404 handler for invalid routes | `text/html` / `text/plain` | `404 Not Found` | `404 - Page Not Found` |
 

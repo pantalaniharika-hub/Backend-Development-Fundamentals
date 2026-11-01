@@ -8,7 +8,7 @@ const server = http.createServer((req, res) => {
     res.end('Welcome to Node.js HTTP Server!');
   } else if (req.url === '/about' && req.method === 'GET') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ name: "Niharika Pantala", section: "CSE-DS 1B" }));
+    res.end(JSON.stringify({ name: "Niharika Pantala", section: "CSE-DS 1B", registrationNumber: "252U1R3070" }));
   } else if (req.url === '/time' && req.method === 'GET') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ currentTime: new Date().toString() }));

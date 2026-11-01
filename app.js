@@ -12,7 +12,8 @@ app.get('/', (request, response) => {
 app.get('/about', (request, response) => {
   response.send({
     name: "Niharika Pantala",
-    section: "CSE-DS 1B"
+    section: "CSE-DS 1B",
+    registrationNumber: "252U1R3070"
   });
 });
 
