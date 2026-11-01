@@ -11,18 +11,18 @@
 | Field | Details |
 | :--- | :--- |
 | **Student Name** | Niharika Pantala |
-| **Registration Number** | [Your Registration Number Here] |
-| **Section** | CSE-DS 1B |
+| **Registration Number** | [252U1R3070] |
+| **Section** | CSE-DS 2B |
 | **Subject** | Backend Development Fundamentals |
 | **Lab** | 02 – SQLite and Relational Database Operations |
-| **Faculty** | Joel Prashanth D. |
+| **Faculty** | Mr. Yugandhar |
 | **University** | Aurora University |
 
 ---
 
 ## 🔗 Project Links
 
-- **GitHub Repository Link:** [https://github.com/pantalaniharika-hub/Backend-Development-Fundamentals](https://github.com/pantalaniharika-hub/Backend-Development-Fundamentals)
+- **GitHub Repository Link:** [https://github.com/pantalaniharika-hub/Backend-Development-Fundamentals](https://github.com/pantalaniharika-hub/Backend-Development-Fundamentals/tree/main/lab-02)
 - **Live Deployment Link:** [https://niharika-lab-2-sqlite.onrender.com/books/](https://niharika-lab-2-sqlite.onrender.com/books/)
 
 ---
