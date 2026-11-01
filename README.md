@@ -51,18 +51,18 @@
 
 ```text
 lab-01/
+├── app.js                 # Express.js application (clean & minimal)
 ├── basic-server.js        # Core Node.js HTTP server using http.createServer()
-├── server.js              # Express.js application with routing & middleware
+├── server.js              # Entry point forwarding to app.js
 ├── package.json           # Project metadata, dependencies & npm scripts
 ├── package-lock.json      # Locked dependency tree
 ├── .gitignore             # Git exclusions (node_modules, .env, OS files)
 ├── README.md              # Comprehensive lab report & documentation
 └── screenshots/           # Verification screenshots of working endpoints
-    ├── 01-home.png        # Screenshot of GET / (Home page)
+    ├── 01-home.png        # Screenshot of GET / (Home route)
     ├── 02-about.png       # Screenshot of GET /about (JSON)
     ├── 03-time.png        # Screenshot of GET /time (JSON)
-    ├── 04-404.png         # Screenshot of unknown route (404 Not Found)
-    └── 05-terminal.png    # Screenshot of server terminal logs
+    └── 04-404.png         # Screenshot of unknown route (404 Not Found)
 ```
 
 ---

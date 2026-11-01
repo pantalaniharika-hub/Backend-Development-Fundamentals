@@ -2,23 +2,18 @@
   "name": "lab-01",
   "version": "1.0.0",
   "description": "Lab 1: Node.js and Express Server - Backend Development Fundamentals",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node server.js",
-    "start:express": "node server.js",
-    "start:basic": "node basic-server.js",
-    "dev": "node --watch server.js"
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "start:basic": "node basic-server.js"
   },
   "keywords": [
     "nodejs",
-    "express",
-    "backend-fundamentals",
-    "http-server",
-    "rest-api"
+    "express"
   ],
   "author": "Niharika Pantala",
   "license": "MIT",
-  "type": "commonjs",
   "dependencies": {
     "express": "^5.3.0"
   }
