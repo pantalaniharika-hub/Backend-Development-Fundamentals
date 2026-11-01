@@ -11,11 +11,11 @@
 | Field | Details |
 | :--- | :--- |
 | **Student Name** | Niharika Pantala |
-| **Registration Number** | [Your Registration Number Here] |
-| **Section** | CSE-DS 1B |
+| **Registration Number** | [252U1R3070] |
+| **Section** | CSE-DS 2B |
 | **Subject** | Backend Development Fundamentals |
 | **Lab** | 02 – SQLite and Relational Database Operations |
-| **Faculty** | Joel Prashanth D. |
+| **Faculty** | Mr. Yugandhar |
 | **University** | Aurora University |
 
 ---
