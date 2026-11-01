@@ -8,7 +8,7 @@
 ## 🌐 Live Deployment & Repository Links
 
 - **Live Render Web Service:** [https://niharika-lab-1-node-js.onrender.com](https://niharika-lab-1-node-js.onrender.com)
-- **GitHub Repository:** [https://github.com/pantalaniharika-hub/lab_1](https://github.com/pantalaniharika-hub/lab_1)
+- **GitHub Repository:** [https://github.com/pantalaniharika-hub/Backend-Development-Fundamentals)
 
 ---
 
