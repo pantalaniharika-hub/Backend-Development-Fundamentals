@@ -18,7 +18,7 @@
 | :--- | :--- |
 | **Student Name** |  Pantala Niharika|
 | **Registration Number** | 252U1R3070 |
-| **Section** | CSE-DS 1B |
+| **Section** | CSE-DS 2B |
 | **Lab** | Lab 1 – Node.js and Express Server |
 | **Course** | Backend Development Fundamentals |
 
