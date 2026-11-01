@@ -7,8 +7,7 @@
 
 ## 🌐 Live Deployment & Repository Links
 
-- **Live Render Web Service:** [Deploying to Render via GitHub...]  
-  *(Will be populated with the exact active Render URL once deployed, e.g., `https://lab-01-xxxx.onrender.com`)*
+- **Live Render Web Service:** [https://niharika-lab-1-node-js.onrender.com](https://niharika-lab-1-node-js.onrender.com)
 - **GitHub Repository:** [https://github.com/pantalaniharika-hub/lab_1](https://github.com/pantalaniharika-hub/lab_1)
 
 ---
