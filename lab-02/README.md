@@ -22,7 +22,7 @@
 
 ## 🔗 Project Links
 
-- **GitHub Repository Link:** [https://github.com/pantalaniharika-hub/backend-development](https://github.com/pantalaniharika-hub/backend-development)
+- **GitHub Repository Link:** [https://github.com/pantalaniharika-hub/Backend-Development-Fundamentals](https://github.com/pantalaniharika-hub/Backend-Development-Fundamentals)
 - **Live Deployment Link:** `https://[your-app-name].onrender.com` *(Placeholder for deployment on Render)*
 
 ---
