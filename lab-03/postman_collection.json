@@ -1,0 +1,860 @@
+{
+  "info": {
+    "name": "Lab 3 - REST API Testing",
+    "description": "Postman Collection for Aurora University - Lab 3: REST API, Query Parameters, Validation, and Debugging\nStudent: Niharika Pantala (Reg No: 252U1R3070 | Section: CSE-DS (2B))\nFaculty: Mr. Yugandhar",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01. GET all books",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Response contains message and data array', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Books retrieved successfully');",
+              "    pm.expect(Array.isArray(jsonData.data)).to.be.true;",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""]
+        },
+        "description": "Retrieve all books from the SQLite database.\nExpected Status: 200 OK\nExpected Message: Books retrieved successfully"
+      }
+    },
+    {
+      "name": "02. GET a specific book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Response returns book with id 1', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Book retrieved successfully');",
+              "    pm.expect(jsonData.data.id).to.eql(1);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/1/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "1", ""]
+        },
+        "description": "Retrieve a single book by ID = 1.\nExpected Status: 200 OK\nExpected Message: Book retrieved successfully"
+      }
+    },
+    {
+      "name": "03. Search books by partial title",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('All returned books contain search keyword', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data.length).to.be.above(0);",
+              "    jsonData.data.forEach(book => {",
+              "        pm.expect(book.title.toLowerCase()).to.include('python');",
+              "    });",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/?search_q=Python",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""],
+          "query": [
+            {
+              "key": "search_q",
+              "value": "Python"
+            }
+          ]
+        },
+        "description": "Partial title search with search_q=Python.\nExpected Status: 200 OK"
+      }
+    },
+    {
+      "name": "04. Sort by price ascending",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Books are sorted by price ascending', function () {",
+              "    const data = pm.response.json().data;",
+              "    for (let i = 0; i < data.length - 1; i++) {",
+              "        pm.expect(data[i].price).to.be.at.most(data[i+1].price);",
+              "    }",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/?order_by=price&order=ASC",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""],
+          "query": [
+            {
+              "key": "order_by",
+              "value": "price"
+            },
+            {
+              "key": "order",
+              "value": "ASC"
+            }
+          ]
+        },
+        "description": "Sort books by price in ascending order.\nExpected Status: 200 OK"
+      }
+    },
+    {
+      "name": "05. Sort by price descending",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Books are sorted by price descending', function () {",
+              "    const data = pm.response.json().data;",
+              "    for (let i = 0; i < data.length - 1; i++) {",
+              "        pm.expect(data[i].price).to.be.at.least(data[i+1].price);",
+              "    }",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/?order_by=price&order=DESC",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""],
+          "query": [
+            {
+              "key": "order_by",
+              "value": "price"
+            },
+            {
+              "key": "order",
+              "value": "DESC"
+            }
+          ]
+        },
+        "description": "Sort books by price in descending order.\nExpected Status: 200 OK"
+      }
+    },
+    {
+      "name": "06. Pagination using limit and offset",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Response data length matches limit', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data.length).to.eql(5);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/?limit=5&offset=2",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""],
+          "query": [
+            {
+              "key": "limit",
+              "value": "5"
+            },
+            {
+              "key": "offset",
+              "value": "2"
+            }
+          ]
+        },
+        "description": "Paginate records with limit=5 and offset=2.\nExpected Status: 200 OK"
+      }
+    },
+    {
+      "name": "07. Minimum and maximum price filtering",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('All returned books fall between min_price and max_price', function () {",
+              "    const data = pm.response.json().data;",
+              "    data.forEach(book => {",
+              "        pm.expect(book.price).to.be.at.least(200);",
+              "        pm.expect(book.price).to.be.at.most(700);",
+              "    });",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/?min_price=200&max_price=700",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""],
+          "query": [
+            {
+              "key": "min_price",
+              "value": "200"
+            },
+            {
+              "key": "max_price",
+              "value": "700"
+            }
+          ]
+        },
+        "description": "Filter books between min_price=200 and max_price=700.\nExpected Status: 200 OK"
+      }
+    },
+    {
+      "name": "08. Combined search, sorting, pagination, and price filtering",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Combined criteria verified', function () {",
+              "    const data = pm.response.json().data;",
+              "    pm.expect(data.length).to.be.at.most(5);",
+              "    data.forEach(book => {",
+              "        pm.expect(book.title.toLowerCase()).to.include('python');",
+              "        pm.expect(book.price).to.be.at.least(200);",
+              "        pm.expect(book.price).to.be.at.most(700);",
+              "    });",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/?search_q=Python&order_by=price&order=DESC&limit=5&offset=0&min_price=200&max_price=700",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""],
+          "query": [
+            {
+              "key": "search_q",
+              "value": "Python"
+            },
+            {
+              "key": "order_by",
+              "value": "price"
+            },
+            {
+              "key": "order",
+              "value": "DESC"
+            },
+            {
+              "key": "limit",
+              "value": "5"
+            },
+            {
+              "key": "offset",
+              "value": "0"
+            },
+            {
+              "key": "min_price",
+              "value": "200"
+            },
+            {
+              "key": "max_price",
+              "value": "700"
+            }
+          ]
+        },
+        "description": "Combined query parameters: search_q=Python, order_by=price, order=DESC, limit=5, offset=0, min_price=200, max_price=700.\nExpected Status: 200 OK"
+      }
+    },
+    {
+      "name": "09. POST a new book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 201', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "pm.test('Response returns success message and bookId', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Book created successfully');",
+              "    pm.expect(jsonData.bookId).to.be.a('number');",
+              "    pm.globals.set('newBookId', jsonData.bookId);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Full Stack Development\",\n    \"author\": \"Niharika\",\n    \"price\": 550,\n    \"pages\": 350\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""]
+        },
+        "description": "Create a new book with valid title, author, price, and pages.\nExpected Status: 201 Created\nExpected Message: Book created successfully"
+      }
+    },
+    {
+      "name": "10. PUT an existing book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Response returns success message', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Book updated successfully');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Full Stack Development (Updated)\",\n    \"author\": \"Niharika Pantala\",\n    \"price\": 600,\n    \"pages\": 380\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/1/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "1", ""]
+        },
+        "description": "Update existing book with ID = 1.\nExpected Status: 200 OK\nExpected Message: Book updated successfully"
+      }
+    },
+    {
+      "name": "11. DELETE an existing book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Response returns success message', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Book deleted successfully');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/12/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "12", ""]
+        },
+        "description": "Delete existing book by ID.\nExpected Status: 200 OK\nExpected Message: Book deleted successfully"
+      }
+    },
+    {
+      "name": "12. GET an invalid book ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is Invalid book ID', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Invalid book ID');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/abc/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "abc", ""]
+        },
+        "description": "Failure test: Fetch book with non-numeric string ID.\nExpected Status: 400 Bad Request\nExpected Message: Invalid book ID"
+      }
+    },
+    {
+      "name": "13. POST without title",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is Title is required', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Title is required');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"author\": \"Niharika\",\n    \"price\": 550,\n    \"pages\": 350\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""]
+        },
+        "description": "Failure test: POST request missing required title field.\nExpected Status: 400 Bad Request\nExpected Message: Title is required"
+      }
+    },
+    {
+      "name": "14. POST without author",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is Author is required', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Author is required');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Cloud Computing\",\n    \"price\": 550,\n    \"pages\": 350\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""]
+        },
+        "description": "Failure test: POST request missing required author field.\nExpected Status: 400 Bad Request\nExpected Message: Author is required"
+      }
+    },
+    {
+      "name": "15. POST with non-numeric price",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is Price must be a number', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Price must be a number');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Cloud Computing\",\n    \"author\": \"Niharika\",\n    \"price\": \"five-hundred\",\n    \"pages\": 350\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""]
+        },
+        "description": "Failure test: POST request with string value for price.\nExpected Status: 400 Bad Request\nExpected Message: Price must be a number"
+      }
+    },
+    {
+      "name": "16. POST with negative price",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is Price cannot be negative', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Price cannot be negative');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Cloud Computing\",\n    \"author\": \"Niharika\",\n    \"price\": -150,\n    \"pages\": 350\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""]
+        },
+        "description": "Failure test: POST request with negative price.\nExpected Status: 400 Bad Request\nExpected Message: Price cannot be negative"
+      }
+    },
+    {
+      "name": "17. GET with invalid order",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message specifies invalid order direction', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.include('Invalid order direction');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/?order=SIDEWAYS",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""],
+          "query": [
+            {
+              "key": "order",
+              "value": "SIDEWAYS"
+            }
+          ]
+        },
+        "description": "Failure test: Invalid order direction query param.\nExpected Status: 400 Bad Request\nExpected Message: Invalid order direction. Allowed values: ASC, DESC"
+      }
+    },
+    {
+      "name": "18. GET with invalid order_by",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message specifies invalid order_by column', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.include('Invalid order_by column');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/?order_by=publisher",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""],
+          "query": [
+            {
+              "key": "order_by",
+              "value": "publisher"
+            }
+          ]
+        },
+        "description": "Failure test: Disallowed order_by column name.\nExpected Status: 400 Bad Request\nExpected Message: Invalid order_by column. Allowed columns: id, title, author, price, pages"
+      }
+    },
+    {
+      "name": "19. GET with negative limit",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message specifies positive integer limit', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Limit must be a positive integer');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/?limit=-5",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""],
+          "query": [
+            {
+              "key": "limit",
+              "value": "-5"
+            }
+          ]
+        },
+        "description": "Failure test: Negative number passed to limit parameter.\nExpected Status: 400 Bad Request\nExpected Message: Limit must be a positive integer"
+      }
+    },
+    {
+      "name": "20. GET with invalid offset",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message specifies non-negative integer offset', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Offset must be a non-negative integer');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/?offset=-3",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""],
+          "query": [
+            {
+              "key": "offset",
+              "value": "-3"
+            }
+          ]
+        },
+        "description": "Failure test: Negative number passed to offset parameter.\nExpected Status: 400 Bad Request\nExpected Message: Offset must be a non-negative integer"
+      }
+    },
+    {
+      "name": "21. GET with min_price greater than max_price",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message specifies min_price cannot exceed max_price', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Minimum price cannot be greater than maximum price');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/?min_price=900&max_price=200",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""],
+          "query": [
+            {
+              "key": "min_price",
+              "value": "900"
+            },
+            {
+              "key": "max_price",
+              "value": "200"
+            }
+          ]
+        },
+        "description": "Failure test: min_price higher than max_price.\nExpected Status: 400 Bad Request\nExpected Message: Minimum price cannot be greater than maximum price"
+      }
+    },
+    {
+      "name": "22. Access an unknown API route",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 404', function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "pm.test('Error message is Route not found', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Route not found');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/invalid-route-name/",
+          "host": ["{{baseUrl}}"],
+          "path": ["invalid-route-name", ""]
+        },
+        "description": "Failure test: Route not defined in the Express app.\nExpected Status: 404 Not Found\nExpected Message: Route not found"
+      }
+    }
+  ]
+}
+
