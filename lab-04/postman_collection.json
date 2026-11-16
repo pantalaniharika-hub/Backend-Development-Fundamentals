@@ -1,0 +1,448 @@
+{
+  "info": {
+    "name": "Lab 4 - Registration and Login JWT",
+    "description": "Postman Collection for Aurora University - Lab 4: Registration, Login and JWT\nStudent: Niharika Pantala (Reg No: 252U1R3070 | Section: CSE-DS (2B))\nFaculty: Mr. Yugandhar",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01. Register User (Success)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 201', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "pm.test('Response contains success message', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('User registered successfully');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"rahul\",\n  \"name\": \"Rahul Sharma\",\n  \"password\": \"Rahul@2024\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/register/",
+          "host": ["{{baseUrl}}"],
+          "path": ["register", ""]
+        },
+        "description": "Registers a new user. Expected Status: 201 Created."
+      }
+    },
+    {
+      "name": "02. Register Duplicate Username (Failure)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is User already exists', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('User already exists');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"niharika\",\n  \"name\": \"Niharika Pantala\",\n  \"password\": \"Niharika123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/register/",
+          "host": ["{{baseUrl}}"],
+          "path": ["register", ""]
+        },
+        "description": "Attempts to register an existing username ('niharika'). Expected Status: 400 Bad Request."
+      }
+    },
+    {
+      "name": "03. Register Without Username (Failure)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is All fields are required', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('All fields are required');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Niharika Pantala\",\n  \"password\": \"Niharika123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/register/",
+          "host": ["{{baseUrl}}"],
+          "path": ["register", ""]
+        },
+        "description": "Registration missing username. Expected Status: 400 Bad Request."
+      }
+    },
+    {
+      "name": "04. Register Without Name (Failure)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is All fields are required', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('All fields are required');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"Password123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/register/",
+          "host": ["{{baseUrl}}"],
+          "path": ["register", ""]
+        },
+        "description": "Registration missing name. Expected Status: 400 Bad Request."
+      }
+    },
+    {
+      "name": "05. Register Without Password (Failure)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is All fields are required', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('All fields are required');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"testuser\",\n  \"name\": \"Test User\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/register/",
+          "host": ["{{baseUrl}}"],
+          "path": ["register", ""]
+        },
+        "description": "Registration missing password. Expected Status: 400 Bad Request."
+      }
+    },
+    {
+      "name": "06. Register With Empty Values (Failure)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is All fields are required', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('All fields are required');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"   \",\n  \"name\": \"\",\n  \"password\": \"   \"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/register/",
+          "host": ["{{baseUrl}}"],
+          "path": ["register", ""]
+        },
+        "description": "Registration with empty whitespace fields. Expected Status: 400 Bad Request."
+      }
+    },
+    {
+      "name": "07. Login (Success)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Response contains jwt_token', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.jwt_token).to.be.a('string');",
+              "    pm.expect(jsonData.jwt_token.length).to.be.above(20);",
+              "    pm.globals.set('authToken', jsonData.jwt_token);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"niharika\",\n  \"password\": \"Niharika123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/login/",
+          "host": ["{{baseUrl}}"],
+          "path": ["login", ""]
+        },
+        "description": "Login with correct credentials. Expected Status: 200 OK, returns jwt_token."
+      }
+    },
+    {
+      "name": "08. Login Unknown Username (Failure)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is Invalid user', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Invalid user');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"unknown_user\",\n  \"password\": \"SomePass123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/login/",
+          "host": ["{{baseUrl}}"],
+          "path": ["login", ""]
+        },
+        "description": "Login with non-existent username. Expected Status: 400 Bad Request, message: Invalid user."
+      }
+    },
+    {
+      "name": "09. Login Incorrect Password (Failure)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is Invalid password', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('Invalid password');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"niharika\",\n  \"password\": \"WrongPassword123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/login/",
+          "host": ["{{baseUrl}}"],
+          "path": ["login", ""]
+        },
+        "description": "Login with wrong password. Expected Status: 400 Bad Request, message: Invalid password."
+      }
+    },
+    {
+      "name": "10. Login Without Username (Failure)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is All fields are required', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('All fields are required');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"password\": \"Niharika123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/login/",
+          "host": ["{{baseUrl}}"],
+          "path": ["login", ""]
+        },
+        "description": "Login missing username field. Expected Status: 400 Bad Request."
+      }
+    },
+    {
+      "name": "11. Login Without Password (Failure)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test('Error message is All fields are required', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('All fields are required');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"niharika\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/login/",
+          "host": ["{{baseUrl}}"],
+          "path": ["login", ""]
+        },
+        "description": "Login missing password field. Expected Status: 400 Bad Request."
+      }
+    }
+  ]
+}
+
