@@ -55,7 +55,7 @@ The primary objectives of this laboratory are:
 - **Cryptography & Hashing:** `bcrypt` (v5.1.1) – Adaptive password hashing with salt rounds
 - **Token-based Authentication:** `jsonwebtoken` (v9.0.2) – Compact, URL-safe means of representing claims
 - **Development Tool:** `nodemon` (v3.1.0) – Live automatic server reload
-- **API Testing Client:** Postman & Built-in In-Process Test Suite (`verify-all.js`)
+- **API Testing Client:** Postman
 - **Version Control:** Git & GitHub
 - **Cloud Hosting:** Render Cloud Platform
 
@@ -68,31 +68,29 @@ The repository maintains an independent, runnable folder for Lab 4 alongside pre
 ```text
 backend-development/
 │
-├── lab-01/                                      # Lab 1 Project (Preserved)
+├── lab-01/
+├── lab-02/
+├── lab-03/
 │
-├── lab-02/                                      # Lab 2 Project (Preserved)
-│
-├── lab-03/                                      # Lab 3 Project (Preserved)
-│
-└── lab-04/                                      # Lab 4 Project (Current)
-    ├── .gitignore                               # Ignores node_modules/ and .env
-    ├── cli.js                                   # Command-line tool to query user.db directly
-    ├── demo.js                                  # Interactive console demo script
-    ├── init-db.js                               # Database initialization script
-    ├── package.json                             # Dependencies, scripts, and metadata
-    ├── package-lock.json                        # Exact pinned dependency lockfile
-    ├── postman_collection.json                  # Complete Postman test collection
-    ├── README.md                                # Comprehensive laboratory documentation
-    ├── server.js                                # Main Express application & auth routes
-    ├── user.db                                  # SQLite database storing users and bcrypt hashes
-    ├── verify-all.js                            # Automated in-memory verification runner
-    └── screenshots/                             # Postman, Database & JWT screenshots
+└── lab-04/
+    ├── server.js
+    ├── package.json
+    ├── package-lock.json
+    ├── user.db
+    ├── .gitignore
+    ├── README.md
+    ├── postman_collection.json
+    └── screenshots/
         ├── .gitkeep
         ├── register-success.png
         ├── register-duplicate.png
         ├── register-validation-error.png
         ├── login-success.png
         ├── login-invalid-user.png
+        ├── login-wrong-password.png
+        ├── database-password-hash.png
+        └── jwt-decoded.png
+```
         ├── login-wrong-password.png
         ├── database-password-hash.png
         └── jwt-decoded.png
@@ -144,10 +142,6 @@ npm install
 | :--- | :--- | :--- |
 | `npm start` | Production Start | Runs `node server.js` |
 | `npm run dev` | Development Start | Runs `nodemon server.js` with auto-reload |
-| `npm test` | Automated Tests | Runs `node verify-all.js` checking all registration, login & JWT cases |
-| `npm run demo` | Interactive Demo | Runs `node demo.js` printing formatted requests, responses & decoded tokens |
-| `npm run init-db` | Database Reset | Initializes `user.db` schema and seeds initial test user |
-| `node cli.js "<SQL>"` | Direct Database Query | Runs arbitrary SQL queries directly on `user.db` |
 
 ---
 
