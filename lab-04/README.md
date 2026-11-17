@@ -8,7 +8,7 @@
 
 ## 🌐 Live Deployment URL
 
-- **Production API URL (Render):** [https://backend-development-fundamentals-fd6q.onrender.com/](https://backend-development-fundamentals-fd6q.onrender.com/)  
+- **Production API URL (Render):** [https://niharika-lab-04-registartion-and-login.onrender.com/](https://niharika-lab-04-registartion-and-login.onrender.com/)  
   *(Live deployment on Render)*
 - **Local Development URL:** `http://localhost:3000/`
 - **GitHub Repository:** [https://github.com/pantalaniharika-hub/Backend-Development-Fundamentals](https://github.com/pantalaniharika-hub/Backend-Development-Fundamentals)
